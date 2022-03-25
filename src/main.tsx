@@ -1,11 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import App from '@/App';
+import '@/styles/main.css'
 
-ReactDOM.render(
-  <React.StrictMode>
+const rootElement = document.getElementById('root');
+
+const app = (
+  <BrowserRouter>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-)
+  </BrowserRouter>
+);
+
+if (rootElement?.hasChildNodes()) {
+  ReactDOM.hydrate(app, rootElement);
+} else {
+  ReactDOM.render(app, rootElement);
+}
