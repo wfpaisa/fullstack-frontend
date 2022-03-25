@@ -1,0 +1,19 @@
+{
+  // "editor.bracketPairColorization.enabled": true,
+  // "editor.guides.bracketPairs": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": [
+    "source.fixAll.eslint"
+  ],
+  //
+  // Custom
+  "window.title": "[ Boilerplate Ract  ] - [ ${activeEditorMedium} ] ${dirty}",
+  "workbench.colorCustomizations": {
+    // "titleBar.activeBackground": "#6200ff"
+    // "statusBar.background": "#8dfdce",
+    // "statusBar.foreground": "#000",
+    // "sideBar.background": "#ff0000"
+    // "activityBar.background": "#6a00ff",
+    // "breadcrumb.background": "#6a00ff"
+  },
+}

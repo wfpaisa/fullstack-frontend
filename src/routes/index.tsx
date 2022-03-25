@@ -1,8 +1,8 @@
-import { RouteObject } from 'react-router-dom';
-import MainLayout from '@/layout/MainLayout';
-import About from '@/pages/About';
-import Home from '@/pages/Home';
-import Error404 from '@/pages/Error404';
+import { RouteObject } from "react-router-dom"
+import MainLayout from "@/layout/MainLayout"
+import About from "@/pages/About"
+import Home from "@/pages/Home"
+import Error404 from "@/pages/Error404"
 
 const routes: RouteObject[] = [
   {
@@ -16,4 +16,4 @@ const routes: RouteObject[] = [
   { path: "*", element: <Error404 /> },
 ]
 
-export default routes;
+export default routes
