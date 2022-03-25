@@ -8,12 +8,15 @@ module.exports = {
     "es6": true
   },
   "plugins": [
+    "prettier",
     "@typescript-eslint"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "eslint-config-prettier",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
