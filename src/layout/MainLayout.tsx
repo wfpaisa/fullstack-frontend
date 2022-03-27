@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom"
+import ErrorBoundary from "@/pages/errors/ErrorBoundary"
 
 const About = () => {
   return (
@@ -9,7 +10,9 @@ const About = () => {
           <Link to="/about">About</Link>
         </nav>
       </header>
-      <Outlet />
+      <ErrorBoundary>
+        <Outlet />
+      </ErrorBoundary>
     </>
   )
 }

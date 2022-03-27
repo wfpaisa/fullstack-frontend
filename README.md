@@ -72,8 +72,9 @@ import.meta.env.VITE_API_PATH;
 ## Adds
 
 ### Recoil (state management)
-uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management
+uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management, for persist use [recoil-persist](https://github.com/polemius/recoil-persist)
 
+- Name atoms rules: [folderComponentNameState] ex:`pageHomeUserState`
 
 
 ## Todo

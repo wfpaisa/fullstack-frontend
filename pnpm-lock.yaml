@@ -17,6 +17,7 @@ specifiers:
   react-dom: ^17.0.2
   react-router-dom: '6'
   recoil: ^0.6.1
+  recoil-persist: ^4.1.0
   typescript: ^4.5.4
   vite: ^2.8.0
 
@@ -25,6 +26,7 @@ dependencies:
   react-dom: 17.0.2_react@17.0.2
   react-router-dom: 6.2.2_react-dom@17.0.2+react@17.0.2
   recoil: 0.6.1_react-dom@17.0.2+react@17.0.2
+  recoil-persist: 4.1.0_recoil@0.6.1
 
 devDependencies:
   '@types/node': 16.11.26
@@ -1815,6 +1817,14 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
+
+  /recoil-persist/4.1.0_recoil@0.6.1:
+    resolution: {integrity: sha512-7ruOsLhrEqBpl8EM6j5OITSKJXvH7BfSDxO5m1Heb3dJo6mnCJ3t4ln1KDJhZrvFOkqyO37Ufv3VB1wU06tfCA==}
+    peerDependencies:
+      recoil: ^0.6.1
+    dependencies:
+      recoil: 0.6.1_react-dom@17.0.2+react@17.0.2
     dev: false
 
   /recoil/0.6.1_react-dom@17.0.2+react@17.0.2:

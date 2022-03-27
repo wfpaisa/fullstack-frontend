@@ -1,17 +1,20 @@
 import { useRecoilState, useRecoilValue } from "recoil"
-import { saludarState } from "./store/saludar"
-import { charCountState } from "./store/selectors"
+import { pageHomeUserState } from "./store/homeAtoms"
+import { charCountState } from "./store/homeSelectors"
 
 const Home = () => {
-  const [text, setText] = useRecoilState(saludarState)
+  const [user, setUser] = useRecoilState(pageHomeUserState)
+
   const count = useRecoilValue(charCountState)
 
   return (
     <div className="App">
       <h1>
-        Home, hola: {text} - {count}
+        Hola: {user.name} - {count}
       </h1>
-      <button onClick={() => setText("felipe")}>Set text</button>
+      <button onClick={() => setUser({ ...{ name: "Felipe" } })}>
+        Set user Felipe
+      </button>
     </div>
   )
 }
