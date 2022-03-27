@@ -71,6 +71,8 @@ import.meta.env.VITE_API_PATH;
 
 ## Adds
 
+### Recoil (state management)
+uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management
 
 
 
@@ -81,7 +83,7 @@ import.meta.env.VITE_API_PATH;
 [ ] Enviroments.
 [x] Linter.
 [x] React router.
-[ ] State management.
+[x] State management.
 [ ] Persist state management.
 [ ] Tests
 [ ] MaterialUI.
