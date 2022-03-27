@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom"
 import MainLayout from "@/layout/MainLayout"
-import About from "@/pages/About"
-import Home from "@/pages/Home"
-import Error404 from "@/pages/Error404"
+import About from "@/pages/about"
+import Home from "@/pages/home"
+import Error404 from "@/pages/errors/404"
 
 const routes: RouteObject[] = [
   {

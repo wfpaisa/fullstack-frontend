@@ -2,13 +2,16 @@ import ReactDOM from "react-dom"
 import { BrowserRouter } from "react-router-dom"
 import App from "@/App"
 import "@/styles/main.css"
+import { RecoilRoot } from "recoil"
 
 const rootElement = document.getElementById("root")
 
 const app = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <RecoilRoot>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>
 )
 
 if (rootElement?.hasChildNodes()) {
