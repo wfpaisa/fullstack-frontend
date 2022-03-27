@@ -72,9 +72,39 @@ import.meta.env.VITE_API_PATH;
 ## Adds
 
 ### Recoil (state management)
-uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management, for persist use [recoil-persist](https://github.com/polemius/recoil-persist)
+uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management.
 
 - Name atoms rules: [folderComponentNameState] ex:`pageHomeUserState`
+
+Persis data with: for persist use [recoil-persist](https://github.com/polemius/recoil-persist)
+
+```js
+import { recoilPersist } from "recoil-persist"
+
+const { persistAtom } = recoilPersist({
+  key: "recoil-persist",
+  storage: localStorage,
+})
+
+export const pageHomeUserState = atom({
+  key: "pageHomeUserState",
+  default: 'ok',
+  effects_UNSTABLE: [persistAtom],
+})
+
+```
+
+### React helmet (Meta tags)
+uses [React-helmet](https://github.com/nfl/react-helmet) for meta tags.
+
+```js
+import {Helmet} from "react-helmet";
+<Helmet>
+    <meta charSet="utf-8" />
+    <title>My Title</title>
+    <link rel="canonical" href="http://mysite.com/example" />
+</Helmet>
+```
 
 
 ## Todo
@@ -86,9 +116,9 @@ uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state 
 [x] React router.
 [x] State management.
 [x] Persist state management.
+[x] Meta Data (import { useMeta } from 'quasar';)
 [ ] Tests
 [ ] MaterialUI.
-[ ] Meta Data (import { useMeta } from 'quasar';)
 
  
 
