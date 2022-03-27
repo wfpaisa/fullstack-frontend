@@ -16,7 +16,7 @@ const Home = () => {
 
       <div className="App">
         <h1>
-          Hola: {user.name} - {count}
+          Hola: {user} - {count}
         </h1>
         <button onClick={() => setUser({ ...{ name: "Felipe" } })}>
           Set user Felipe

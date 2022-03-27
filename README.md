@@ -106,6 +106,10 @@ import {Helmet} from "react-helmet";
 </Helmet>
 ```
 
+### Cypress (E2E testing)
+uses [Cypress](https://www.cypress.io/) for E2E testing.
+
+Directory: `test/cypress` 
 
 ## Todo
 [x] Vite.
@@ -117,7 +121,7 @@ import {Helmet} from "react-helmet";
 [x] State management.
 [x] Persist state management.
 [x] Meta Data (import { useMeta } from 'quasar';)
-[ ] Tests
+[x] Tests
 [ ] MaterialUI.
 
  
