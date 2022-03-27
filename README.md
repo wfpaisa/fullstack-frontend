@@ -81,11 +81,11 @@ uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state 
 [x] Vite.
 [x] React.
 [x] Typescript.
-[ ] Enviroments.
+[x] Enviroments.
 [x] Linter.
 [x] React router.
 [x] State management.
-[ ] Persist state management.
+[x] Persist state management.
 [ ] Tests
 [ ] MaterialUI.
 [ ] Meta Data (import { useMeta } from 'quasar';)

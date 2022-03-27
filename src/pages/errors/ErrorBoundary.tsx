@@ -24,7 +24,12 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <h1 style={{ color: "#9f0000" }}>Error rendering components</h1>
+      return (
+        <>
+          <h1 style={{ color: "#9f0000" }}>Error rendering components</h1>
+          <p>error handle (pages/errors/ErrorBoundary.)</p>
+        </>
+      )
     }
 
     return this.props.children
