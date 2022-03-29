@@ -18,8 +18,9 @@ const Home = () => {
 
       <div className="App">
         <h1>
-          Hola: {user.name} - {count}
+          Hola: {user.name} - Lenght:{count}
         </h1>
+
         <Button
           variant="contained"
           color="primary"

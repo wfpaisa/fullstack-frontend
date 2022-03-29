@@ -1,16 +1,15 @@
 import { atom } from "recoil"
 import { recoilPersist } from "recoil-persist"
 
+// Settings for persisting data
 const { persistAtom } = recoilPersist({
-  key: "components-layout-main",
+  key: "settings",
   storage: localStorage,
 })
 
-export const layoutMainState = atom({
-  key: "layoutMainState",
-  default: {
-    drawerOpen: true,
-    drawerSize: 100,
-  },
+/**  ----- Main atoms -----  **/
+export const drawerState = atom({
+  key: "drawerState",
+  default: true,
   effects_UNSTABLE: [persistAtom],
 })

@@ -1,69 +1,78 @@
 import * as React from "react"
 import Toolbar from "@mui/material/Toolbar"
-import { styled } from "@mui/material/styles"
+import { styled, Theme } from "@mui/material/styles"
 import IconButton from "@mui/material/IconButton"
-import MuiDrawer from "@mui/material/Drawer"
+import MuiDrawer, { DrawerProps as MuiDrawerProps } from "@mui/material/Drawer"
 import Divider from "@mui/material/Divider"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-
 import List from "@mui/material/List"
 import ListItemButton from "@mui/material/ListItemButton"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
-
 import DashboardIcon from "@mui/icons-material/Dashboard"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-
 import { useNavigate } from "react-router-dom"
-
 import { useRecoilState } from "recoil"
-import { layoutMainState } from "@/components/layout/Main/store/main-atoms"
+import { drawerState } from "@/components/layout/Main/store/main-atoms"
 
-const drawerWidth = 240
+interface DrawerProps extends MuiDrawerProps {
+  drawerwidth?: number | string
+  theme?: Theme
+}
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
+const myStyles = ({ theme, open, drawerwidth }: DrawerProps) => {
+  if (!theme) return {}
+
+  console.log("theme", theme.spacing(7))
+  const defaultStyle = {
+    "& .MuiDrawer-paper": {
+      position: "relative",
+      whiteSpace: "nowrap",
+      width: drawerwidth,
       transition: theme.transitions.create("width", {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+        duration: theme.transitions.duration.enteringScreen,
       }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}))
-
-export default function Header() {
-  const [mainState, setMainState] = useRecoilState(layoutMainState)
-  const navigate = useNavigate()
-
-  const toggleDrawer = () => {
-    setMainState({
-      ...mainState,
-      drawerOpen: !mainState.drawerOpen,
-    })
+      boxSizing: "border-box",
+    },
   }
+
+  if (!open) {
+    return {
+      ...defaultStyle,
+      "& .MuiDrawer-paper": {
+        overflowX: "hidden",
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up("sm")]: {
+          width: theme.spacing(9),
+        },
+      },
+    }
+  }
+
+  return defaultStyle
+}
+const Drawer = styled(MuiDrawer)<DrawerProps>((props) => myStyles(props))
+
+interface HeaderProps {
+  drawerwidth: number
+}
+
+export default function Header({ drawerwidth }: HeaderProps) {
+  const navigate = useNavigate()
+  const [drawer, setDrawer] = useRecoilState(drawerState)
+  const toggleDrawer = () => setDrawer(!drawer)
 
   const handleNavigate = (to: string) => {
     navigate(to, { replace: true })
   }
 
   return (
-    <Drawer variant="permanent" open={mainState.drawerOpen}>
+    <Drawer variant="permanent" open={drawer} drawerwidth={drawerwidth}>
       <Toolbar
         sx={{
           display: "flex",

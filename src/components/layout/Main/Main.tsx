@@ -10,10 +10,12 @@ import Toolbar from "@mui/material/Toolbar"
 import Container from "@mui/material/Container"
 
 const About = () => {
+  const drawerWidth = 240
+
   return (
     <Box sx={{ display: "flex" }}>
-      <Header />
-      <Drawer />
+      <Header drawerwidth={drawerWidth} />
+      <Drawer drawerwidth={drawerWidth} />
 
       <Box
         component="main"

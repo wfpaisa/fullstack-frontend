@@ -1,7 +1,5 @@
-import * as React from "react"
 import Toolbar from "@mui/material/Toolbar"
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
-import { styled } from "@mui/material/styles"
+import AppBar from "@mui/material/AppBar"
 import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import Typography from "@mui/material/Typography"
@@ -9,44 +7,26 @@ import Badge from "@mui/material/Badge"
 import NotificationsIcon from "@mui/icons-material/Notifications"
 
 import { useRecoilState } from "recoil"
-import { layoutMainState } from "@/components/layout/Main/store/main-atoms"
+import { drawerState } from "@/components/layout/Main/store/main-atoms"
 
-const drawerWidth = 240
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean
+interface DrawerProps {
+  drawerwidth: number
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}))
-
-export default function Header() {
-  const [mainState, setMainState] = useRecoilState(layoutMainState)
-
-  const toggleDrawer = () => {
-    setMainState({
-      ...mainState,
-      drawerOpen: !mainState.drawerOpen,
-    })
-  }
+export default function Header({ drawerwidth }: DrawerProps) {
+  const [drawer, setDrawer] = useRecoilState(drawerState)
+  const toggleDrawer = () => setDrawer(!drawer)
 
   return (
-    <AppBar position="absolute" open={mainState.drawerOpen}>
+    <AppBar
+      className="anima"
+      position="absolute"
+      sx={{
+        marginLeft: drawer ? drawerwidth : 0,
+        width: drawer ? `calc(100% - ${drawerwidth}px)` : "100%",
+        zIndex: 1201,
+      }}
+    >
       <Toolbar
         sx={{
           pr: "24px", // keep right padding when drawer closed
@@ -59,7 +39,7 @@ export default function Header() {
           onClick={toggleDrawer}
           sx={{
             marginRight: "36px",
-            ...(mainState.drawerOpen && { display: "none" }),
+            ...(drawer && { display: "none" }),
           }}
         >
           <MenuIcon />
