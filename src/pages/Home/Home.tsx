@@ -3,6 +3,8 @@ import { pageHomeUserState } from "./store/homeAtoms"
 import { charCountState } from "./store/homeSelectors"
 import { Helmet } from "react-helmet"
 
+import Button from "@mui/material/Button"
+
 const Home = () => {
   const [user, setUser] = useRecoilState(pageHomeUserState)
 
@@ -16,11 +18,15 @@ const Home = () => {
 
       <div className="App">
         <h1>
-          Hola: {user} - {count}
+          Hola: {user.name} - {count}
         </h1>
-        <button onClick={() => setUser({ ...{ name: "Felipe" } })}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setUser({ ...{ name: "Felipe" } })}
+        >
           Set user Felipe
-        </button>
+        </Button>
       </div>
     </>
   )

@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil"
-import { pageHomeUserState } from "@/pages/home/store/homeAtoms"
+import { pageHomeUserState } from "@/pages/Home/store/homeAtoms"
 import { Helmet } from "react-helmet"
 
 const About = () => {

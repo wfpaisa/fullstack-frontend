@@ -13,11 +13,10 @@
 
 https://vuejs.org/style-guide/
 
-- Files names: `PascalCase`
-- Folder names: `kebab-case`
-- Variables: `camelCase`
+- Folder/File names: `kebab-case`
+- Folder/File component names: `PascalCase`
+- Variables: `camelCases`
 - API: `camelCase`
-- URL: `kebab-case`
 
 ### DEV (Compile and Hot-Reload for Development)
 
@@ -122,7 +121,7 @@ Directory: `test/cypress`
 [x] Persist state management.
 [x] Meta Data (import { useMeta } from 'quasar';)
 [x] Tests
-[ ] MaterialUI.
+[x] MaterialUI.
 
  
 

@@ -5,7 +5,8 @@
     "lib": [
       "DOM",
       "DOM.Iterable",
-      "ESNext"
+      "ESNext",
+      "es6"
     ],
     "allowJs": false,
     "skipLibCheck": false,
@@ -24,7 +25,10 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
   },
   "include": [
     "src"
