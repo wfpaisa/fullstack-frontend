@@ -1,48 +1,84 @@
 import * as React from "react"
 import Toolbar from "@mui/material/Toolbar"
-import Link from "@mui/material/Link"
-// import { useNavigate, Link as LinkRouter } from "react-router-dom"
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
+import { styled } from "@mui/material/styles"
+import IconButton from "@mui/material/IconButton"
+import MenuIcon from "@mui/icons-material/Menu"
+import Typography from "@mui/material/Typography"
+import Badge from "@mui/material/Badge"
+import NotificationsIcon from "@mui/icons-material/Notifications"
 
-// interface HeaderProps {
-//   sections: ReadonlyArray<{
-//     title: string
-//     url: string
-//   }>
-//   title: string
-// }
+import { useRecoilState } from "recoil"
+import { layoutMainState } from "@/components/layout/Main/store/main-atoms"
+
+const drawerWidth = 240
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(["width", "margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}))
 
 export default function Header() {
-  // export default function Header(props: HeaderProps) {
-  // const { sections, title } = props
-  // const navigate = useNavigate()
-  const sections = [
-    { title: "Home", url: "/" },
-    { title: "About", url: "/about" },
-  ]
+  const [mainState, setMainState] = useRecoilState(layoutMainState)
+
+  const toggleDrawer = () => {
+    setMainState({
+      ...mainState,
+      drawerOpen: !mainState.drawerOpen,
+    })
+  }
 
   return (
-    <Toolbar
-      component="nav"
-      variant="dense"
-      sx={{
-        justifyContent: "start",
-        overflowX: "auto",
-        borderBottom: 1,
-        borderColor: "divider",
-      }}
-    >
-      {sections.map((section) => (
-        <Link
+    <AppBar position="absolute" open={mainState.drawerOpen}>
+      <Toolbar
+        sx={{
+          pr: "24px", // keep right padding when drawer closed
+        }}
+      >
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={toggleDrawer}
+          sx={{
+            marginRight: "36px",
+            ...(mainState.drawerOpen && { display: "none" }),
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography
+          component="h1"
+          variant="h6"
           color="inherit"
           noWrap
-          key={section.title}
-          variant="body2"
-          href={section.url}
-          sx={{ p: 1, flexShrink: 0 }}
+          sx={{ flexGrow: 1 }}
         >
-          {section.title}
-        </Link>
-      ))}
-    </Toolbar>
+          Dashboard
+        </Typography>
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   )
 }
