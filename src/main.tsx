@@ -13,7 +13,6 @@ import { darkModeState } from "@/stores/settings-atoms"
 const Mui = () => {
   const [darkMode] = useRecoilState(darkModeState)
   // console.log("Theme", Theme("true"))
-  window.theme = Theme(darkMode)
 
   return (
     <ThemeProvider theme={Theme(darkMode)}>
