@@ -3,13 +3,13 @@ import { recoilPersist } from "recoil-persist"
 
 // Settings for persisting data
 const { persistAtom } = recoilPersist({
-  key: "main-layout",
+  key: "settings",
   storage: localStorage,
 })
 
 /**  ----- Main atoms -----  **/
-export const drawerState = atom({
-  key: "drawerState",
-  default: true,
+export const darkModeState = atom({
+  key: "darkModeState",
+  default: false,
   effects_UNSTABLE: [persistAtom],
 })

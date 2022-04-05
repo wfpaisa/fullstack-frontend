@@ -19,32 +19,43 @@ const LinkBehavior = forwardRef<
 })
 
 // Create a theme instance.
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#6601e9",
-    },
-    secondary: {
-      main: "#0184e9",
-    },
-    error: {
-      main: red.A400,
-    },
-  },
-
-  // React-router en <Links> y <buttons>
-  components: {
-    MuiLink: {
-      defaultProps: {
-        component: LinkBehavior,
-      } as LinkProps,
-    },
-    MuiButtonBase: {
-      defaultProps: {
-        LinkComponent: LinkBehavior,
+const theme = (mode: string) => {
+  return createTheme({
+    palette: {
+      mode: mode ? "dark" : "light",
+      background: {
+        default: mode ? "rgb(17, 25, 54)" : "rgb(255, 255, 255)",
+        paper: mode ? "rgb(17, 25, 54)" : "rgb(255, 255, 255)",
+      },
+      text: {
+        primary: mode ? "rgb(255, 255, 255)" : "rgb(17, 25, 54)",
+      },
+      divider: mode ? "rgb(30, 40, 75)" : "rgb(229, 228, 230)",
+      primary: {
+        main: "#c701e9",
+      },
+      secondary: {
+        main: "#0184e9",
+      },
+      error: {
+        main: red.A400,
       },
     },
-  },
-})
+
+    // React-router en <Links> y <buttons>
+    components: {
+      MuiLink: {
+        defaultProps: {
+          component: LinkBehavior,
+        } as LinkProps,
+      },
+      MuiButtonBase: {
+        defaultProps: {
+          LinkComponent: LinkBehavior,
+        },
+      },
+    },
+  })
+}
 
 export default theme

@@ -1,13 +1,33 @@
 import { Outlet } from "react-router-dom"
 import ErrorBoundary from "@/pages/Errors/ErrorBoundary"
-import "./styles.scss"
-import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Box, { BoxProps } from "@mui/material/Box"
+import { styled } from "@mui/material/styles"
 import Header from "../Header"
 import Drawer from "../Drawer"
-import Toolbar from "@mui/material/Toolbar"
-import Container from "@mui/material/Container"
+import "./styles.scss"
 
-const About = () => {
+const BoxMainStyled = styled(Box)<BoxProps>(({ theme }) => {
+  // console.log("thememain", theme)
+  return {
+    color: theme.palette.success.main,
+    background:
+      theme.palette.mode === "dark"
+        ? "rgba(255, 255, 255, 0.13)"
+        : "rgb(227, 242, 253)",
+    borderRadius: "12px 12px 0px 0px",
+    minHeight: "calc(100vh - 64px)",
+    flexGrow: 1,
+    p: 2,
+    width: "100%",
+    margin: "64px 8px 0 8px",
+    [theme.breakpoints.up("md")]: {
+      margin: "64px 16px 0px 16px",
+    },
+  }
+})
+
+const Main = () => {
   const drawerWidth = 240
 
   return (
@@ -15,24 +35,25 @@ const About = () => {
       <Header />
       <Drawer drawerwidth={drawerWidth} />
 
-      <Box
-        component="main"
-        className="anima"
-        sx={{
+      <BoxMainStyled component="main">
+        {/* <Box component="main" className="anima mainc"> */}
+        {/* sx={{
+          background: "rgb(227, 242, 253)",
+          borderRadius: "12px 12px 0px 0px",
+          minHeight: "calc(100vh - 64px)",
           flexGrow: 1,
-          p: 3,
+          p: 2,
           width: "100%",
-        }}
-      >
-        <Toolbar />
+          margin: { xs: "64px 8px 0 8px", xl: "64px 16px 0px 16px" },
+        }} */}
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>
         </Container>
-      </Box>
+      </BoxMainStyled>
     </Box>
   )
 }
 
-export default About
+export default Main

@@ -27,6 +27,33 @@ export default function Header({ drawerwidth }: HeaderProps) {
     navigate(to, { replace: true })
   }
 
+  // Avoid hide scrollbar when drawer is open in desktop
+  const ShowMobileDrawer = () => {
+    if (window.innerWidth < 600) {
+      return (
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={drawer}
+          onClose={toggleDrawer}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerwidth,
+            },
+          }}
+        >
+          {menuList}
+        </Drawer>
+      )
+    }
+    return null
+  }
+
   const menuList = (
     <List component="nav">
       <ListItemButton onClick={() => handleNavigate("/")}>
@@ -55,34 +82,23 @@ export default function Header({ drawerwidth }: HeaderProps) {
       }}
     >
       {/* Movil */}
+      <ShowMobileDrawer />
+
+      {/* Desktop */}
       <Drawer
-        container={container}
-        variant="temporary"
+        variant="persistent"
+        anchor="left"
         open={drawer}
         onClose={toggleDrawer}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            boxSizing: "border-box",
-            width: drawerwidth,
-          },
-        }}
-      >
-        {menuList}
-      </Drawer>
-
-      {/* Desktop */}
-      <Drawer
-        variant="persistent"
-        open={drawer}
-        sx={{
           display: { xs: "none", sm: "block" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerwidth,
+            borderRight: "0px",
           },
         }}
       >

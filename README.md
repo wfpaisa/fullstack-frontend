@@ -122,7 +122,7 @@ Directory: `test/cypress`
 [x] Meta Data (import { useMeta } from 'quasar';)
 [x] Tests
 [x] MaterialUI.
-
+[x] Black mode, check example: https://berrydashboard.io/forms/frm-autocomplete
  
 
 

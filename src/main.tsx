@@ -1,26 +1,41 @@
 import ReactDOM from "react-dom"
+import { RecoilRoot } from "recoil"
 import { BrowserRouter } from "react-router-dom"
 import App from "@/App"
-import { RecoilRoot } from "recoil"
-import CssBaseline from "@mui/material/CssBaseline"
+
+// Mui
 import { ThemeProvider } from "@mui/material/styles"
+import CssBaseline from "@mui/material/CssBaseline"
 import Theme from "@/styles/Theme"
+import { useRecoilState } from "recoil"
+import { darkModeState } from "@/stores/settings-atoms"
 
-const rootElement = document.getElementById("root")
+const Mui = () => {
+  const [darkMode] = useRecoilState(darkModeState)
+  // console.log("Theme", Theme("true"))
+  window.theme = Theme(darkMode)
 
-const app = (
-  <RecoilRoot>
-    <ThemeProvider theme={Theme}>
+  return (
+    <ThemeProvider theme={Theme(darkMode)}>
       <CssBaseline />
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </ThemeProvider>
+  )
+}
+
+// Store
+const Main = (
+  <RecoilRoot>
+    <Mui />
   </RecoilRoot>
 )
 
+const rootElement = document.getElementById("root")
+
 if (rootElement?.hasChildNodes()) {
-  ReactDOM.hydrate(app, rootElement)
+  ReactDOM.hydrate(Main, rootElement)
 } else {
-  ReactDOM.render(app, rootElement)
+  ReactDOM.render(Main, rootElement)
 }
