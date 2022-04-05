@@ -9,22 +9,16 @@ import NotificationsIcon from "@mui/icons-material/Notifications"
 import { useRecoilState } from "recoil"
 import { drawerState } from "@/components/layout/Main/store/main-atoms"
 
-interface DrawerProps {
-  drawerwidth: number
-}
-
-export default function Header({ drawerwidth }: DrawerProps) {
+export default function Header() {
   const [drawer, setDrawer] = useRecoilState(drawerState)
   const toggleDrawer = () => setDrawer(!drawer)
 
   return (
     <AppBar
       className="anima"
-      position="absolute"
+      position="fixed"
       sx={{
-        marginLeft: drawer ? drawerwidth : 0,
-        width: drawer ? `calc(100% - ${drawerwidth}px)` : "100%",
-        zIndex: 1201,
+        zIndex: { sm: 1201 },
       }}
     >
       <Toolbar
@@ -39,7 +33,6 @@ export default function Header({ drawerwidth }: DrawerProps) {
           onClick={toggleDrawer}
           sx={{
             marginRight: "36px",
-            ...(drawer && { display: "none" }),
           }}
         >
           <MenuIcon />

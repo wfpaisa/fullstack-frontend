@@ -1,8 +1,6 @@
 import { Outlet } from "react-router-dom"
 import ErrorBoundary from "@/pages/Errors/ErrorBoundary"
-
 import "./styles.scss"
-// import Container from "@mui/material/Container"
 import Box from "@mui/material/Box"
 import Header from "../Header"
 import Drawer from "../Drawer"
@@ -14,19 +12,16 @@ const About = () => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <Header drawerwidth={drawerWidth} />
+      <Header />
       <Drawer drawerwidth={drawerWidth} />
 
       <Box
         component="main"
+        className="anima"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
           flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
+          p: 3,
+          width: "100%",
         }}
       >
         <Toolbar />
