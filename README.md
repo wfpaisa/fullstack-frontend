@@ -133,8 +133,6 @@ toast.success("Here is your toast.")
 [x] MaterialUI.
 [x] Black mode, check example: https://berrydashboard.io/forms/frm-autocomplete
 [ ] Graphql
-[ ] Login
-      - tratrando de mutar el estado de settings por fuera, en settings-actions
 [ ] Forms validation
 
 

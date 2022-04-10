@@ -22,10 +22,14 @@ const LinkBehavior = forwardRef<
 const bgColor = "rgb(241, 241, 241)"
 const fgColor = "rgb(17, 25, 54)"
 const separatorColor = "rgb(229, 228, 230)"
+const primaryColor = "#8750DE"
+const secondaryColor = "#007EFF"
 
 const bgDarkColor = "rgb(17, 25, 54)"
 const fgDarkColor = "rgb(229, 228, 230)"
 const separatorDarkColor = "rgb(30, 40, 75)"
+const primaryDarkColor = "#8750DE"
+const secondaryDarkColor = "#007EFF"
 
 // Create a theme instance.
 const theme = (mode: string) => {

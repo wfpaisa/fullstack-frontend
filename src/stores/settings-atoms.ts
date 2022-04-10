@@ -13,3 +13,28 @@ export const darkModeState = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 })
+
+/**  ----- Main atoms -----  **/
+export const settingsState = atom({
+  key: "settingsState",
+  default: {
+    token: null,
+    darkMode: false,
+  } as ISettingsState,
+  effects_UNSTABLE: [persistAtom],
+})
+
+/** ------------------------ Types ----------------------*/
+
+/**
+ * Settings state
+ */
+export interface ISettingsState {
+  token: string | null
+  darkMode: boolean
+}
+
+/**
+ * Settings partial state
+ */
+export type ISettingsStatePartial = Partial<ISettingsState>
