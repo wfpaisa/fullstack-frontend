@@ -110,6 +110,15 @@ uses [Cypress](https://www.cypress.io/) for E2E testing.
 
 Directory: `test/cypress` 
 
+### Alerts
+https://react-hot-toast.com/
+
+```js
+import { Toaster } from "react-hot-toast"
+// variant could be success, error
+toast.success("Here is your toast.")
+```
+
 ## Todo
 [x] Vite.
 [x] React.
@@ -123,7 +132,10 @@ Directory: `test/cypress`
 [x] Tests
 [x] MaterialUI.
 [x] Black mode, check example: https://berrydashboard.io/forms/frm-autocomplete
- 
+[ ] Graphql
+[ ] Login
+      - tratrando de mutar el estado de settings por fuera, en settings-actions
+[ ] Forms validation
 
 
 

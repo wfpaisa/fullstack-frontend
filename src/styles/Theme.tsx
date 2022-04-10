@@ -18,24 +18,33 @@ const LinkBehavior = forwardRef<
   return <RouterLink data-testid="custom-link" ref={ref} to={href} {...other} />
 })
 
+// Colors
+const bgColor = "rgb(241, 241, 241)"
+const fgColor = "rgb(17, 25, 54)"
+const separatorColor = "rgb(229, 228, 230)"
+
+const bgDarkColor = "rgb(17, 25, 54)"
+const fgDarkColor = "rgb(229, 228, 230)"
+const separatorDarkColor = "rgb(30, 40, 75)"
+
 // Create a theme instance.
 const theme = (mode: string) => {
   return createTheme({
     palette: {
       mode: mode ? "dark" : "light",
       background: {
-        default: mode ? "rgb(17, 25, 54)" : "rgb(255, 255, 255)",
-        paper: mode ? "rgb(17, 25, 54)" : "rgb(255, 255, 255)",
+        default: mode ? bgDarkColor : bgColor,
+        paper: mode ? bgDarkColor : bgColor,
       },
       text: {
-        primary: mode ? "rgb(255, 255, 255)" : "rgb(17, 25, 54)",
+        primary: mode ? fgDarkColor : fgColor,
       },
-      divider: mode ? "rgb(30, 40, 75)" : "rgb(229, 228, 230)",
+      divider: mode ? separatorDarkColor : separatorColor,
       primary: {
-        main: "#c701e9",
+        main: "#8750DE",
       },
       secondary: {
-        main: "#0184e9",
+        main: "#007EFF",
       },
       error: {
         main: red.A400,
@@ -58,4 +67,17 @@ const theme = (mode: string) => {
   })
 }
 
+const toastOptions = (modeDark: boolean) => {
+  return {
+    className: "",
+    duration: 5000,
+    style: {
+      borderRadius: "6px",
+      background: modeDark ? bgColor : bgDarkColor,
+      color: modeDark ? fgColor : fgDarkColor,
+    },
+  }
+}
+
+export { theme, toastOptions }
 export default theme
