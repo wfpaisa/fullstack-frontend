@@ -1,39 +1,44 @@
 import toast from "react-hot-toast"
 import axios from "axios"
+import { ifError } from "assert"
 
 /**
  * Alerts for strapi common errors
  * @param err Axios error
  */
-const ErrorStrapiAlert = (err: Error) => {
+const ErrorStrapiAlert = (err: Error | any) => {
+  console.log("->", err.graphQLErrors[0].extensions.error)
+  let error = {}
+
+  // debugger
+
+  if (err.graphQLErrors) {
+    error = err.graphQLErrors[0].extensions.error
+  }
+
   if (axios.isAxiosError(err)) {
     // console.log("err", err)
+    error = err.response?.data
+  }
 
-    if (err.response?.data.error.details.errors) {
-      const listItems = err.response?.data.error.details.errors.map(
-        (val: { message: string }, index: number) => (
-          <li key={index}>{val.message}</li>
-        )
+  // if (error.error.details.errors) {
+
+  if (error.details) {
+    const listItems = error.details.errors.map(
+      (val: { message: string }, index: number) => (
+        <li key={index}>{val.message}</li>
       )
+    )
 
-      toast.error((t) => {
-        return (
-          <div style={{ marginLeft: "10px" }}>
-            <b>Error {err.response?.status}</b>
-
-            <ul style={{ margin: "0px 0px 0px 18px", padding: "0px" }}>
-              {listItems}
-            </ul>
-            {/* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */}
-          </div>
-        )
-      })
-    } else {
-      console.log("Ver para manejar error de strapi:", err)
-      toast.error(err.message)
-    }
+    toast.error((t) => {
+      return (
+        <ul style={{ margin: "0px 0px 0px 18px", padding: "0px" }}>
+          {listItems}
+        </ul>
+      )
+    })
   } else {
-    toast.error(`Error: ${err.message}`)
+    toast.error(err.message)
   }
 }
 

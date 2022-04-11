@@ -8,17 +8,9 @@ const { persistAtom } = recoilPersist({
 })
 
 /**  ----- Main atoms -----  **/
-export const darkModeState = atom({
-  key: "darkModeState",
-  default: false,
-  effects_UNSTABLE: [persistAtom],
-})
-
-/**  ----- Main atoms -----  **/
 export const settingsState = atom({
   key: "settingsState",
   default: {
-    token: null,
     darkMode: false,
   } as ISettingsState,
   effects_UNSTABLE: [persistAtom],
@@ -30,7 +22,6 @@ export const settingsState = atom({
  * Settings state
  */
 export interface ISettingsState {
-  token: string | null
   darkMode: boolean
 }
 

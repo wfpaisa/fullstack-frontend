@@ -14,11 +14,10 @@ export default function Header() {
   const [settings, setSettings] = useRecoilState(settingsState)
 
   const toggleDrawer = () => setDrawer(!drawer)
+
   const toggleSettings = () => {
-    console.log("1settings", settings)
     const data = { darkMode: !settings.darkMode } as ISettingsStatePartial
     setSettings({ ...settings, ...data })
-    console.log("2settings", settings)
   }
 
   return (

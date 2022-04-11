@@ -1,19 +1,19 @@
-// import { useRecoilState } from "recoil"
-// import { pageHomeUserState } from "@/pages/Home/store/homeAtoms"
 import { Helmet } from "react-helmet"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
-
 import TextField from "@mui/material/TextField"
-// import FormControlLabel from "@mui/material/FormControlLabel"
-// import Checkbox from "@mui/material/Checkbox"
 import Link from "@mui/material/Link"
 import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
-import axios from "axios"
+import { gql, useMutation } from "@apollo/client"
+import { useEffect, useState } from "react"
+import { userState, IUserStatePartial } from "@/stores/user-atoms"
+import { useRecoilState } from "recoil"
+import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom"
 import { ErrorStrapiAlert } from "@/utils/alerts"
 
 function Copyright(props: any) {
@@ -35,30 +35,65 @@ function Copyright(props: any) {
 }
 
 const Login = () => {
-  // const [user, setUser] = useRecoilState(pageHomeUserState)
-  // const { enqueueSnackbar } = useSnackbar()
+  const [loadingReq, setLoadingReq] = useState(false)
+  const navigate = useNavigate()
+  const [user, setUser] = useRecoilState(userState)
+
+  const QUERY_FORM_LOGIN = gql`
+    mutation ($identifier: String!, $password: String!) {
+      login(input: { identifier: $identifier, password: $password }) {
+        jwt
+        user {
+          id
+          username
+          email
+          confirmed
+          blocked
+        }
+      }
+    }
+  `
+
+  const [loginQuery, { data, loading, error }] = useMutation(QUERY_FORM_LOGIN)
+
+  /**
+   * Login
+   */
+  useEffect(() => {
+    // When login is successful, set the user state
+    if (loading === false && data) {
+      storeUser({
+        token: data.login.jwt,
+        ...data.login.user,
+      })
+      setLoadingReq(false)
+      toast.success("Login correcto")
+      navigate("/")
+    }
+  }, [loading, data])
+
+  const storeUser = (user: IUserStatePartial) => {
+    setUser(user)
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     const dataForm = new FormData(event.currentTarget)
-    console.log("data", dataForm)
 
     const login = {
       identifier: dataForm.get("email"),
       password: dataForm.get("password"),
     }
 
+    setLoadingReq(true)
+
     try {
-      const { data } = await axios.post(
-        "http://localhost:1337/api/auth/local",
-        login
-      )
-      // console.log("data--->", data)
+      await loginQuery({ variables: login })
     } catch (err: Error | any) {
+      setLoadingReq(false)
       ErrorStrapiAlert(err)
     }
-
-    // variant could be success, error, warning, info, or default
   }
 
   return (
@@ -135,7 +170,7 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Iniciar sesión
+              {loadingReq ? <span>Loading...</span> : "Iniciar sesión"}
             </Button>
 
             {/* <Grid container>

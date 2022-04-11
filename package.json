@@ -11,6 +11,7 @@
     "cypress:open": "cypress open --project test"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@babel/core": "^7.17.8",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
@@ -20,6 +21,7 @@
     "@types/react-helmet": "^6.1.5",
     "axios": "^0.26.1",
     "csstype": "^3.0.10",
+    "graphql": "^16.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
