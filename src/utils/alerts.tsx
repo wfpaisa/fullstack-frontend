@@ -1,29 +1,31 @@
 import toast from "react-hot-toast"
-import axios from "axios"
+import { isApolloError, ApolloError } from "@apollo/client"
+
+type TErrors = {
+  message: string
+  name: string
+}
+
+type TStrapiGraphQLError = {
+  error: {
+    name: string
+    message: string
+    details: {
+      errors: TErrors[]
+    }
+  }
+  code: string
+}
 
 /**
- * Alerts for strapi common errors
+ * Alerts for Strapi GraphQL common errors
  * @param err Axios error
  */
-const ErrorStrapiAlert = (err: Error | any) => {
-  console.log("->", err.graphQLErrors[0].extensions.error)
-  let error = {}
+const ErrorStrapiAlert = (err: ApolloError | Error) => {
+  if (isApolloError(err)) {
+    const error = err.graphQLErrors[0].extensions as TStrapiGraphQLError
 
-  // debugger
-
-  if (err.graphQLErrors) {
-    error = err.graphQLErrors[0].extensions.error
-  }
-
-  if (axios.isAxiosError(err)) {
-    // console.log("err", err)
-    error = err.response?.data
-  }
-
-  // if (error.error.details.errors) {
-
-  if (error.details) {
-    const listItems = error.details.errors.map(
+    const listItems = error.error.details.errors.map(
       (val: { message: string }, index: number) => (
         <li key={index}>{val.message}</li>
       )
@@ -42,4 +44,3 @@ const ErrorStrapiAlert = (err: Error | any) => {
 }
 
 export { ErrorStrapiAlert }
-// export default ErrorStrapiAlert

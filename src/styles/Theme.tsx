@@ -32,7 +32,7 @@ const primaryDarkColor = "#8750DE"
 const secondaryDarkColor = "#007EFF"
 
 // Create a theme instance.
-const theme = (mode: string) => {
+const theme = (mode: boolean) => {
   return createTheme({
     palette: {
       mode: mode ? "dark" : "light",

@@ -133,6 +133,7 @@ toast.success("Here is your toast.")
 [x] MaterialUI.
 [x] Black mode, check example: https://berrydashboard.io/forms/frm-autocomplete
 [ ] Graphql
+    - pasar App.tsx`//localhost:1337/graph`a variable de entorno
 [ ] Forms validation
 
 

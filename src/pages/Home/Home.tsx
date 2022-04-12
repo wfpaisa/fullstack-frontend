@@ -1,6 +1,3 @@
-import { useRecoilState, useRecoilValue } from "recoil"
-import { pageHomeUserState } from "./store/homeAtoms"
-import { charCountState } from "./store/homeSelectors"
 import { Helmet } from "react-helmet"
 import Card from "@mui/material/Card"
 import CardActions from "@mui/material/CardActions"
@@ -10,10 +7,6 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 
 const Home = () => {
-  const [user, setUser] = useRecoilState(pageHomeUserState)
-
-  const count = useRecoilValue(charCountState)
-
   return (
     <>
       <Helmet>
@@ -21,9 +14,7 @@ const Home = () => {
       </Helmet>
 
       <div className="App">
-        <h1>
-          Hola: {user.name} - Lenght:{count}
-        </h1>
+        <h1>Hola</h1>
 
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
@@ -42,12 +33,6 @@ const Home = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button
-              size="small"
-              onClick={() => setUser({ ...{ name: "Felipe" } })}
-            >
-              Set Felipe
-            </Button>
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>

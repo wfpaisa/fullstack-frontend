@@ -10,34 +10,25 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import { gql, useMutation } from "@apollo/client"
 import { useEffect, useState } from "react"
-import { userState, IUserStatePartial } from "@/stores/user-atoms"
-import { useRecoilState } from "recoil"
+
 import toast from "react-hot-toast"
 import { useNavigate } from "react-router-dom"
 import { ErrorStrapiAlert } from "@/utils/alerts"
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://teractivo.com/">
-        Teractivo
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  )
-}
+import { userStore, userModel } from "@/stores/user"
+import FormControl from "@mui/material/FormControl"
+import InputLabel from "@mui/material/InputLabel"
+import OutlinedInput from "@mui/material/OutlinedInput"
+import InputAdornment from "@mui/material/InputAdornment"
+import IconButton from "@mui/material/IconButton"
+import VisibilityOff from "@mui/icons-material/VisibilityOff"
+import Visibility from "@mui/icons-material/Visibility"
 
 const Login = () => {
   const [loadingReq, setLoadingReq] = useState(false)
+  const [typePassword, setTypePassword] = useState(false)
   const navigate = useNavigate()
-  const [user, setUser] = useRecoilState(userState)
+  const user = userStore((state) => state)
 
   const QUERY_FORM_LOGIN = gql`
     mutation ($identifier: String!, $password: String!) {
@@ -53,8 +44,7 @@ const Login = () => {
       }
     }
   `
-
-  const [loginQuery, { data, loading, error }] = useMutation(QUERY_FORM_LOGIN)
+  const [loginQuery, { data, loading }] = useMutation(QUERY_FORM_LOGIN)
 
   /**
    * Login
@@ -62,37 +52,37 @@ const Login = () => {
   useEffect(() => {
     // When login is successful, set the user state
     if (loading === false && data) {
-      storeUser({
+      user.setUser({
         token: data.login.jwt,
         ...data.login.user,
       })
+
       setLoadingReq(false)
       toast.success("Login correcto")
       navigate("/")
     }
   }, [loading, data])
 
-  const storeUser = (user: IUserStatePartial) => {
-    setUser(user)
-  }
-
+  /**
+   * Form submit
+   */
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
-    const dataForm = new FormData(event.currentTarget)
-
-    const login = {
-      identifier: dataForm.get("email"),
-      password: dataForm.get("password"),
-    }
 
     setLoadingReq(true)
 
     try {
-      await loginQuery({ variables: login })
+      const dataForm = new FormData(event.currentTarget)
+
+      const dataFormUser = {
+        identifier: dataForm.get("email"),
+        password: dataForm.get("password"),
+      }
+      await loginQuery({ variables: dataFormUser })
     } catch (err: Error | any) {
       setLoadingReq(false)
       ErrorStrapiAlert(err)
+      user.setUser({ ...userModel })
     }
   }
 
@@ -150,20 +140,29 @@ const Login = () => {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+
+            <FormControl fullWidth required variant="outlined">
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <OutlinedInput
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                type={typePassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setTypePassword(!typePassword)}
+                      edge="end"
+                    >
+                      {typePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+
             <Button
               type="submit"
               fullWidth
@@ -172,7 +171,6 @@ const Login = () => {
             >
               {loadingReq ? <span>Loading...</span> : "Iniciar sesión"}
             </Button>
-
             {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2" >
@@ -185,7 +183,19 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid> */}
-            <Copyright sx={{ mt: 5 }} />
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              align="center"
+              sx={{ mt: 5 }}
+            >
+              {"Copyright © "}
+              <Link color="inherit" href="https://teractivo.com/">
+                Teractivo
+              </Link>{" "}
+              {new Date().getFullYear()}
+              {"."}
+            </Typography>
           </Box>
         </Box>
       </Grid>

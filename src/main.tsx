@@ -1,14 +1,11 @@
 import ReactDOM from "react-dom"
-import { RecoilRoot } from "recoil"
 import { BrowserRouter } from "react-router-dom"
 import App from "@/App"
 
 const Main = (
-  <RecoilRoot>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </RecoilRoot>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 )
 
 const rootElement = document.getElementById("root")

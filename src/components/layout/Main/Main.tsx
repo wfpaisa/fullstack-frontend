@@ -10,7 +10,6 @@ import "./styles.scss"
 const BoxMainStyled = styled(Box)<BoxProps>(({ theme }) => {
   // console.log("thememain", theme)
   return {
-    color: theme.palette.success.main,
     background:
       theme.palette.mode === "dark"
         ? "rgba(255, 255, 255, 0.13)"

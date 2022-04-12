@@ -7,8 +7,7 @@ import ListItemText from "@mui/material/ListItemText"
 import DashboardIcon from "@mui/icons-material/Dashboard"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { useNavigate } from "react-router-dom"
-import { useRecoilState } from "recoil"
-import { drawerState } from "@/components/layout/Main/store/main-atoms"
+import { settingsStore } from "@/stores/settings"
 import Box from "@mui/material/Box"
 
 interface HeaderProps {
@@ -17,8 +16,8 @@ interface HeaderProps {
 
 export default function Header({ drawerwidth }: HeaderProps) {
   const navigate = useNavigate()
-  const [drawer, setDrawer] = useRecoilState(drawerState)
-  const toggleDrawer = () => setDrawer(!drawer)
+  const settings = settingsStore((state) => state)
+  // const toggleDrawer = () => setDrawer(!drawer)
 
   const container =
     window !== undefined ? () => window.document.body : undefined
@@ -34,8 +33,8 @@ export default function Header({ drawerwidth }: HeaderProps) {
         <Drawer
           container={container}
           variant="temporary"
-          open={drawer}
-          onClose={toggleDrawer}
+          open={settings.drawer}
+          onClose={() => settings.toogleDrawer()}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
@@ -69,6 +68,13 @@ export default function Header({ drawerwidth }: HeaderProps) {
         </ListItemIcon>
         <ListItemText primary="About" />
       </ListItemButton>
+
+      <ListItemButton onClick={() => handleNavigate("/blog")}>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Blog" />
+      </ListItemButton>
     </List>
   )
 
@@ -77,8 +83,8 @@ export default function Header({ drawerwidth }: HeaderProps) {
       component="nav"
       className="anima"
       sx={{
-        width: { sm: drawer ? drawerwidth : 0 },
-        flexShrink: { sm: drawer ? 0 : null },
+        width: { sm: settings.drawer ? drawerwidth : 0 },
+        flexShrink: { sm: settings.drawer ? 0 : null },
       }}
     >
       {/* Movil */}
@@ -88,8 +94,8 @@ export default function Header({ drawerwidth }: HeaderProps) {
       <Drawer
         variant="persistent"
         anchor="left"
-        open={drawer}
-        onClose={toggleDrawer}
+        open={settings.drawer}
+        onClose={() => settings.toogleDrawer()}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}

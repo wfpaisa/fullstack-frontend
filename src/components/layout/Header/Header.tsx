@@ -5,20 +5,10 @@ import MenuIcon from "@mui/icons-material/Menu"
 import Brightness4Icon from "@mui/icons-material/Brightness4"
 import Brightness7Icon from "@mui/icons-material/Brightness7"
 import Typography from "@mui/material/Typography"
-import { useRecoilState } from "recoil"
-import { drawerState } from "@/components/layout/Main/store/main-atoms"
-import { settingsState, ISettingsStatePartial } from "@/stores/settings-atoms"
+import { settingsStore } from "@/stores/settings"
 
 export default function Header() {
-  const [drawer, setDrawer] = useRecoilState(drawerState)
-  const [settings, setSettings] = useRecoilState(settingsState)
-
-  const toggleDrawer = () => setDrawer(!drawer)
-
-  const toggleSettings = () => {
-    const data = { darkMode: !settings.darkMode } as ISettingsStatePartial
-    setSettings({ ...settings, ...data })
-  }
+  const settings = settingsStore((state) => state)
 
   return (
     <AppBar
@@ -41,7 +31,7 @@ export default function Header() {
           edge="start"
           color="inherit"
           aria-label="open drawer"
-          onClick={toggleDrawer}
+          onClick={() => settings.toogleDrawer()}
           sx={{
             marginRight: "36px",
           }}
@@ -60,7 +50,7 @@ export default function Header() {
         </Typography>
 
         {/* Ico Dark mode */}
-        <IconButton onClick={() => toggleSettings()}>
+        <IconButton onClick={() => settings.toogleDarkMode()}>
           {settings.darkMode ? <Brightness4Icon /> : <Brightness7Icon />}
         </IconButton>
 

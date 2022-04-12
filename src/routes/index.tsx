@@ -1,12 +1,13 @@
 import { RouteObject, Navigate, useLocation } from "react-router-dom"
 import DefaultLayout from "@/components/layout/Main"
 import AuthLayout from "@/components/layout/Auth"
-import About from "@/pages/About"
-import Login from "@/pages/Login"
 import Home from "@/pages/Home"
+import Login from "@/pages/Login"
+import About from "@/pages/About"
+import Blog from "@/pages/Blog"
 import Error404 from "@/pages/Errors/404"
-import { useRecoilValue } from "recoil"
-import { userState } from "@/stores/user-atoms"
+// import { useRecoilValue } from "recoil"
+import { userStore } from "@/stores/user"
 
 const routes: RouteObject[] = [
   {
@@ -23,6 +24,7 @@ const routes: RouteObject[] = [
         element: <Home />,
       },
       { path: "about", element: <About /> },
+      { path: "blog", element: <Blog /> },
     ],
   },
 
@@ -40,7 +42,7 @@ const routes: RouteObject[] = [
  * Check if user is logged in
  */
 function RequireAuth({ children }: { children: JSX.Element }) {
-  const user = useRecoilValue(userState)
+  const user = userStore((state) => state)
   const location = useLocation()
 
   if (!user.token) {
