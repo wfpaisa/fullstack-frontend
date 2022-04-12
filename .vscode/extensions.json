@@ -1,6 +1,9 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "naumovs.color-highlight"
+    "naumovs.color-highlight",
+    "apollographql.vscode-apollo",
+    "dsznajder.es7-react-js-snippets",
+    "mikestead.dotenv"
   ]
 }

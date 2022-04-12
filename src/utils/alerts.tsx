@@ -1,6 +1,5 @@
 import toast from "react-hot-toast"
 import axios from "axios"
-import { ifError } from "assert"
 
 /**
  * Alerts for strapi common errors
