@@ -8,6 +8,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { useNavigate } from "react-router-dom"
 import { settingsStore } from "@/stores/settings"
+import BookIcon from "@mui/icons-material/Book"
 import Box from "@mui/material/Box"
 
 interface HeaderProps {
@@ -71,7 +72,7 @@ export default function Header({ drawerwidth }: HeaderProps) {
 
       <ListItemButton onClick={() => handleNavigate("/blog")}>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <BookIcon />
         </ListItemIcon>
         <ListItemText primary="Blog" />
       </ListItemButton>

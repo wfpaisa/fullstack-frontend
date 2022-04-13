@@ -5,6 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import Brightness4Icon from "@mui/icons-material/Brightness4"
 import Brightness7Icon from "@mui/icons-material/Brightness7"
 import Typography from "@mui/material/Typography"
+import UserMenu from "@/components/layout/UserMenu"
 import { settingsStore } from "@/stores/settings"
 
 export default function Header() {
@@ -13,10 +14,10 @@ export default function Header() {
   return (
     <AppBar
       className="anima"
-      position="absolute"
+      position="fixed"
       color="default"
       sx={{
-        background: "none",
+        backgroundColor: "background.default",
         backgroundImage: "none",
         zIndex: { sm: 1201 },
         boxShadow: 0,
@@ -48,6 +49,8 @@ export default function Header() {
         >
           Dashboard
         </Typography>
+
+        <UserMenu />
 
         {/* Ico Dark mode */}
         <IconButton onClick={() => settings.toogleDarkMode()}>

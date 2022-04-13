@@ -12,6 +12,7 @@ export type TUser = {
 
 export interface IUserState extends TUser {
   setUser: (user: TUser) => void
+  setLogout: () => void
 }
 
 export const userModel = {
@@ -33,6 +34,7 @@ export const userStore = create<IUserState>(
     (set) => ({
       ...userModel,
       setUser: (newUser) => set((state) => ({ ...state, ...newUser })),
+      setLogout: () => set(() => ({ ...userModel })),
     }),
     {
       name: "user",

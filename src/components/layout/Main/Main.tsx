@@ -14,14 +14,14 @@ const BoxMainStyled = styled(Box)<BoxProps>(({ theme }) => {
       theme.palette.mode === "dark"
         ? "rgba(255, 255, 255, 0.13)"
         : "rgb(227, 242, 253)",
-    borderRadius: "12px 12px 0px 0px",
-    minHeight: "calc(100vh - 64px)",
+    borderRadius: "12px",
+    minHeight: "calc(100vh - 80px)",
     flexGrow: 1,
     p: 2,
     width: "100%",
     margin: "64px 8px 0 8px",
     [theme.breakpoints.up("md")]: {
-      margin: "64px 16px 0px 16px",
+      margin: "64px 16px 16px 16px",
     },
   }
 })

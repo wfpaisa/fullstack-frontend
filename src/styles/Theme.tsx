@@ -19,7 +19,7 @@ const LinkBehavior = forwardRef<
 })
 
 // Colors
-const bgColor = "rgb(241, 241, 241)"
+const bgColor = "rgb(255, 255, 255)"
 const fgColor = "rgb(17, 25, 54)"
 const separatorColor = "rgb(229, 228, 230)"
 const primaryColor = "#8750DE"
