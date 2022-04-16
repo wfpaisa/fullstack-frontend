@@ -4,7 +4,6 @@ import AuthLayout from "@/components/layout/Auth"
 import Home from "@/pages/Home"
 import Login from "@/pages/Login"
 import About from "@/pages/About"
-import Blog from "@/pages/Blog"
 import Error404 from "@/pages/Errors/404"
 // import { useRecoilValue } from "recoil"
 import { userStore } from "@/stores/user"
@@ -24,7 +23,7 @@ const routes: RouteObject[] = [
         element: <Home />,
       },
       { path: "about", element: <About /> },
-      { path: "blog", element: <Blog /> },
+      // { path: "blog", element: <Blog /> },
     ],
   },
 

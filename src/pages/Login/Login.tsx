@@ -31,7 +31,7 @@ const Login = () => {
   const user = userStore((state) => state)
 
   const QUERY_FORM_LOGIN = gql`
-    mutation ($identifier: String!, $password: String!) {
+    mutation LoginData($identifier: String!, $password: String!) {
       login(input: { identifier: $identifier, password: $password }) {
         jwt
         user {

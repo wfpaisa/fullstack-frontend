@@ -2,6 +2,11 @@
   transition: all 0.2s ease-in-out !important;
 }
 
+
+img {
+  max-width: 100%;
+}
+
 /* ------ SCROLLBAR ------ */
 ::-webkit-scrollbar {
   width: 12px;

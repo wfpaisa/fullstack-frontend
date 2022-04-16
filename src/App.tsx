@@ -20,11 +20,11 @@ const App = () => {
   const settings = settingsStore((state) => state)
   const user = userStore((state) => state)
 
-  const VITE_GRAPHQL_URI = import.meta.env.VITE_GRAPHQL_URI
+  const VITE_API = import.meta.env.VITE_API
   // console.log("Theme", Theme("true"))
 
   // GraphQL client
-  const httpLink = createHttpLink({ uri: VITE_GRAPHQL_URI })
+  const httpLink = createHttpLink({ uri: `${VITE_API}/graphql` })
   const authLink = setContext((_, { headers }) => {
     // return the headers to the context so httpLink can read them
     return {

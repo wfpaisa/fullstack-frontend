@@ -70,12 +70,12 @@ export default function Header({ drawerwidth }: HeaderProps) {
         <ListItemText primary="About" />
       </ListItemButton>
 
-      <ListItemButton onClick={() => handleNavigate("/blog")}>
+      {/* <ListItemButton onClick={() => handleNavigate("/blog")}>
         <ListItemIcon>
           <BookIcon />
         </ListItemIcon>
         <ListItemText primary="Blog" />
-      </ListItemButton>
+      </ListItemButton> */}
     </List>
   )
 

@@ -118,6 +118,15 @@ import { Toaster } from "react-hot-toast"
 // variant could be success, error
 toast.success("Here is your toast.")
 ```
+### Markdown
+
+```jsx
+import ReactMarkdown from "react-markdown"
+// 
+<ReactMarkdown transformImageUri={(uri) => `${import.meta.env.VITE_API}${uri}`}>
+  {post.attributes.shortDescription}
+</ReactMarkdown>
+```
 
 ## Todo
 [x] Vite.
