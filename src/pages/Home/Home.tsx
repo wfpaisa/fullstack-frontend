@@ -8,15 +8,18 @@ import Pagination from "@mui/material/Pagination"
 import ReactMarkdown from "react-markdown"
 import { ChangeEvent } from "react"
 import { useEffect } from "react"
+import { formatDateTimeLarge } from "@/utils/date"
 
 const Home = () => {
   const { VITE_API } = import.meta.env
+  const pageSize = 2
 
   const QUERY_GET_NEWS = gql`
-    query News($page: Int!) {
+    query News($page: Int!, $pageSize: Int!) {
       news(
         filters: { active: { eq: true } }
-        pagination: { page: $page, pageSize: 1 }
+        sort: "createdAt:desc"
+        pagination: { page: $page, pageSize: $pageSize }
       ) {
         data {
           attributes {
@@ -45,17 +48,25 @@ const Home = () => {
       title: string
       publishedAt: string
       description: string
+      blogs: {
+        data: {
+          id: string
+          attributes: {
+            title: string
+          }
+        }
+      }
     }
     id: string
   }
 
-  const handlePaginate = (e: ChangeEvent<unknown>, p: number) => {
-    getNews({ variables: { page: p } })
+  const handlePaginate = (e: ChangeEvent<unknown>, page: number) => {
+    getNews({ variables: { page, pageSize } })
   }
 
   // Create component
   useEffect(() => {
-    getNews({ variables: { page: 1 } })
+    getNews({ variables: { page: 1, pageSize } })
   }, [])
 
   return (
@@ -65,7 +76,7 @@ const Home = () => {
       </Helmet>
 
       <div className="App">
-        <h1>Hola...</h1>
+        <h1>Últimas noticias</h1>
 
         {error && "Error:" + error.message}
 
@@ -81,15 +92,20 @@ const Home = () => {
                     <Typography gutterBottom variant="h5" component="div">
                       {post.attributes.title}
                     </Typography>
+                    <Typography
+                      component="div"
+                      variant="caption"
+                      color="text.secondary"
+                    >
+                      {formatDateTimeLarge(post.attributes.publishedAt)}
+                    </Typography>
 
                     {/* Description */}
                     <Typography
                       component="div"
-                      variant="body2"
-                      color="text.secondary"
+                      variant="body1"
+                      color="text.primary"
                     >
-                      <small>{post.attributes.publishedAt}</small>
-
                       <ReactMarkdown
                         transformImageUri={(uri) => `${VITE_API}${uri}`}
                       >
@@ -105,7 +121,7 @@ const Home = () => {
             <Grid item>
               <Pagination
                 // count={20}
-                count={data.news.meta.pagination.total}
+                count={data.news.meta.pagination.pageCount}
                 page={data.news.meta.pagination.page}
                 onChange={handlePaginate}
                 siblingCount={1}

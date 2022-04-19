@@ -24,12 +24,17 @@ type TStrapiGraphQLError = {
 const ErrorStrapiAlert = (err: ApolloError | Error) => {
   if (isApolloError(err)) {
     const error = err.graphQLErrors[0].extensions as TStrapiGraphQLError
+    let listItems = [] as JSX.Element[]
 
-    const listItems = error.error.details.errors.map(
-      (val: { message: string }, index: number) => (
-        <li key={index}>{val.message}</li>
+    if (error.error.details.errors) {
+      listItems = error.error.details.errors.map(
+        (val: { message: string }, index: number) => (
+          <li key={index}>{val.message}</li>
+        )
       )
-    )
+    } else {
+      listItems.push(<li key={1}>{error.error.message}</li>)
+    }
 
     toast.error((t) => {
       return (

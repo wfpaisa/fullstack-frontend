@@ -16,4 +16,6 @@
     // "activityBar.background": "#6a00ff",
     // "breadcrumb.background": "#6a00ff"
   },
+  // Apollo
+  "apollographql.display.showRunInStudioButton": false,
 }

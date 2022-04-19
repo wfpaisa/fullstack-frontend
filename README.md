@@ -1,13 +1,16 @@
-# Boilerplate Vite React
+# FullStack Frontend (Vite, React)
 
-# FITEC
 
 ## Build
-
-- Could need quasar: `yarn global add @quasar/cli@latest`
 - Install pnpm: `curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm`
 
+```bash
+$ pnpm build
+```
+
 ## Development
+uses: pnpm: `curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm`
+
 
 ### Style guide
 
@@ -70,31 +73,12 @@ import.meta.env.VITE_API_PATH;
 
 ## Adds
 
-### Recoil (state management)
-uses [Recoil](https://recoiljs.org/docs/introduction/getting-started) for state management.
+### Zustand (State management)
+State management: [zustand](https://github.com/pmndrs/zustand)
 
-- Name atoms rules: [folderComponentNameState] ex:`pageHomeUserState`
-
-Persis data with: for persist use [recoil-persist](https://github.com/polemius/recoil-persist)
-
-```js
-import { recoilPersist } from "recoil-persist"
-
-const { persistAtom } = recoilPersist({
-  key: "recoil-persist",
-  storage: localStorage,
-})
-
-export const pageHomeUserState = atom({
-  key: "pageHomeUserState",
-  default: 'ok',
-  effects_UNSTABLE: [persistAtom],
-})
-
-```
 
 ### React helmet (Meta tags)
-uses [React-helmet](https://github.com/nfl/react-helmet) for meta tags.
+uses [React-helmet](https://github.com/staylor/react-helmet-async) for meta tags.
 
 ```js
 import {Helmet} from "react-helmet";
@@ -118,6 +102,7 @@ import { Toaster } from "react-hot-toast"
 // variant could be success, error
 toast.success("Here is your toast.")
 ```
+
 ### Markdown
 
 ```jsx
@@ -128,6 +113,14 @@ import ReactMarkdown from "react-markdown"
 </ReactMarkdown>
 ```
 
+### GraphQL
+https://www.apollographql.com/docs/react/data/queries
+
+
+### Forms
+Form validatios: https://react-hook-form.com/get-started#Quickstart
+Validations: https://github.com/jquense/yup
+
 ## Todo
 [x] Vite.
 [x] React.
@@ -137,13 +130,12 @@ import ReactMarkdown from "react-markdown"
 [x] React router.
 [x] State management.
 [x] Persist state management.
-[x] Meta Data (import { useMeta } from 'quasar';)
-[x] Tests
+[x] Meta Data.
+[x] Tests.
 [x] MaterialUI.
-[x] Black mode, check example: https://berrydashboard.io/forms/frm-autocomplete
-[x] Graphql
-    - pasar App.tsx`//localhost:1337/graph`a variable de entorno
-[ ] Forms validation
+[x] Black mode.
+[x] Graphql.
+[x] Forms validation.
 
 
 

@@ -47,6 +47,7 @@ const App = () => {
         position="top-right"
         toastOptions={toastOptions(settings.darkMode)}
       />
+
       <ApolloProvider client={client}>{Routes}</ApolloProvider>
     </ThemeProvider>
   )
