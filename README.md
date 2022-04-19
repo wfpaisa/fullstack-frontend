@@ -5,6 +5,9 @@
 - Install pnpm: `curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm`
 
 ```bash
+# Enviroment, and edit .env
+cp .env.example .env
+
 $ pnpm build
 ```
 
@@ -28,6 +31,9 @@ https://vuejs.org/style-guide/
 
 # Recommended extensions : `Ctrl + Shift + P ` search: (show recommended extensions) install all
 # Take over - in plugins search: `@builtin typescript` and disable in workspace: https://github.com/johnsoncodehk/volar/discussions/471
+
+# Enviroment, and edit .env
+cp .env.example .env
 
 # Dependencies:
 $ pnpm i
