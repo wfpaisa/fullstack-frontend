@@ -128,20 +128,20 @@ Form validatios: https://react-hook-form.com/get-started#Quickstart
 Validations: https://github.com/jquense/yup
 
 ## Todo
-[x] Vite.
-[x] React.
-[x] Typescript.
-[x] Enviroments.
-[x] Linter.
-[x] React router.
-[x] State management.
-[x] Persist state management.
-[x] Meta Data.
-[x] Tests.
-[x] MaterialUI.
-[x] Black mode.
-[x] Graphql.
-[x] Forms validation.
+- [x] Vite.
+- [x] React.
+- [x] Typescript.
+- [x] Enviroments.
+- [x] Linter.
+- [x] React router.
+- [x] State management.
+- [x] Persist state management.
+- [x] Meta Data.
+- [x] Tests.
+- [x] MaterialUI.
+- [x] Black mode.
+- [x] Graphql.
+- [x] Forms validation.
 
 
 
